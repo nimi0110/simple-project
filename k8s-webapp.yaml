@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: simple-project
+  label:
+   app: simple-project
+spec:
+  replicas: 3
+  selector:
+   matchLabels:
+    app: simple-project
+  template:
+    metadata:
+      labels:
+        app: simple-project
+    spec:
+      containers:
+      - name: simple-project
+        image: mywebapp:latest
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 8000
