@@ -1,0 +1,34 @@
+apiVersion: apps/v1 
+kind: Deployment
+metadata:
+  name: angular-deployment
+spec:
+  selector:
+    matchLabels:
+      app: angular
+  replicas: 5 # tells deployment to run 2 pods matching the template
+  template:
+    metadata:
+      labels:
+        app: angular
+    spec:
+      containers:
+      - name: angular
+        image: nirmala12345/demo:1.4
+        ports:
+        - containerPort: 80
+---
+# https://kubernetes.io/docs/concepts/s...  
+kind: Service
+apiVersion: v1
+metadata:
+  name: angular-service
+spec:
+  selector:
+    app: angular
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 80
+    nodePort: 33000
+  type: LoadBalancer
