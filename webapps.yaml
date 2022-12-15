@@ -1,19 +1,19 @@
 apiVersion: apps/v1 
 kind: Deployment
 metadata:
-  name: angular-deployment
+  name: sample-deployment
 spec:
   selector:
     matchLabels:
-      app: angular
+      app: sample
   replicas: 5 # tells deployment to run 2 pods matching the template
   template:
     metadata:
       labels:
-        app: angular
+        app: sample
     spec:
       containers:
-      - name: angular
+      - name: sample
         image: nirmala12345/demo:1.4
         ports:
         - containerPort: 80
@@ -22,13 +22,13 @@ spec:
 kind: Service
 apiVersion: v1
 metadata:
-  name: angular-service
+  name: sample-service
 spec:
   selector:
-    app: angular
+    app: sample
   ports:
   - protocol: TCP
     port: 80
     targetPort: 80
-    nodePort: 33000
+    nodePort: 32000
   type: LoadBalancer
